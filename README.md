@@ -1,6 +1,6 @@
 _This project was made for Assignment 2 of Ngee Ann Polytechnic's Emerging Trends in IT module._ 
 
-# HytchHyke
+# Class Exchange
 
 ## Microservice Architecture Design
 
