@@ -6,10 +6,11 @@ services:
       - mysql
     build:
       context: ./backend
-    container_name: backend
+    image: class_exchange_backend
+    container_name: class_exchange_backend
     hostname: backend
     networks: 
-      - bridgeNetwork
+      - class_exchange_network
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     environment:
@@ -18,21 +19,21 @@ services:
 
   mysql:
     image: mysql:latest
-    container_name: mysql
+    container_name: class_exchange_mysql
     hostname: db
     networks: 
-      - bridgeNetwork
+      - class_exchange_network
     ports:
       - "3307:${DB_PORT}"
     volumes:
-      - mysql:/var/lib/mysql
+      - class_exchange:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
       - MYSQL_DATABASE=${DB_NAME}
 
 volumes:
-  mysql:
+  class_exchange:
 
 networks:
-  bridgeNetwork:
+  class_exchange_network:
     driver: bridge
