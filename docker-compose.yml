@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  backend:
+    depends_on:
+      - mysql
+    build:
+      context: ./backend
+    container_name: backend
+    hostname: backend
+    networks: 
+      - bridgeNetwork
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    environment:
+      - DSN=${DSN}
+      - BACKEND_PORT=${BACKEND_PORT}
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    hostname: db
+    networks: 
+      - bridgeNetwork
+    ports:
+      - "3307:${DB_PORT}"
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+
+volumes:
+  mysql:
+
+networks:
+  bridgeNetwork:
+    driver: bridge
