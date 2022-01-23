@@ -23,8 +23,6 @@ services:
     hostname: db
     networks: 
       - class_exchange_network
-    ports:
-      - "3307:${DB_PORT}"
     volumes:
       - class_exchange:/var/lib/mysql
     environment:
