@@ -1,0 +1,17 @@
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  background-color: #009879;
+  border-radius: 1.5rem;
+  padding: 5rem 0px 5rem 0px;
+  width: 15rem;
+  color: white;
+  margin: 1rem;
+  text-align: center;
+}
