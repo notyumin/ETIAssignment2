@@ -7,17 +7,19 @@ import (
 	"os"
 	"reflect"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 type ClassOffer struct {
-	Id          int `gorm:"primaryKey"`
-	StudentId   string
+	Id          int    `gorm:"primaryKey"`
+	CreatedBy   string //studentId
 	Offer       string
 	Want        string
 	IsCompleted bool
+	completedBy string //studentId
 }
 
 var db *gorm.DB
@@ -52,6 +54,10 @@ func migrateDb() {
 func initRouter() {
 	router := mux.NewRouter()
 
+	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type"})
+	originsOk := handlers.AllowedOrigins([]string{"*"})
+	methodsOk := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE"})
+
 	router.HandleFunc("/classOffers", getClassOffers).Methods("GET") //has url query params
 	router.HandleFunc("/classOffers", createClassOffer).Methods("POST")
 	router.HandleFunc("/classOffers/{id}", updateClassOffer).Methods("PUT")
@@ -61,7 +67,7 @@ func initRouter() {
 	portNo := os.Getenv("BACKEND_PORT")
 
 	fmt.Printf("ClassOffer Microservice running on port %s...\n", portNo)
-	err := http.ListenAndServe(":"+portNo, router)
+	err := http.ListenAndServe(":"+portNo, handlers.CORS(originsOk, headersOk, methodsOk)(router))
 	if err != nil {
 		panic("InitRouter failed with error: " + err.Error())
 	}
@@ -97,6 +103,12 @@ func getClassOffers(w http.ResponseWriter, r *http.Request) {
 }
 
 func createClassOffer(w http.ResponseWriter, r *http.Request) {
+	//get session ID from http header cookie (connect.sId?)
+
+	//validate session ID with redis server
+
+	//get userId from redis server
+
 	var classOffer ClassOffer
 
 	decodeErr := json.NewDecoder(r.Body).Decode(&classOffer)
@@ -106,7 +118,7 @@ func createClassOffer(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//validate empty fields
-	if isFieldMissing(w, classOffer.StudentId, "studentId") ||
+	if isFieldMissing(w, classOffer.CreatedBy, "createdBy") ||
 		isFieldMissing(w, classOffer.Want, "want") ||
 		isFieldMissing(w, classOffer.Offer, "offer") {
 		return

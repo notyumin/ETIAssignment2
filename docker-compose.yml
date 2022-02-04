@@ -23,9 +23,11 @@ services:
     image: class_exchange_frontend
     container_name: class_exchange_frontend
     ports: 
-    - "${FRONTEND_PORT}:80"
+      - "${FRONTEND_PORT}:80"
     environment:
-    - NGINX_PORT=80
+      - NGINX_PORT=80
+    networks: 
+      - class_exchange_network
 
   mysql:
     image: mysql:latest

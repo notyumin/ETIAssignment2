@@ -4,9 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/create.css">
     <title>Create Class Offer</title>
 </head>
 <body>
-    <form action="" method="post"></form>
+    <div class="header">
+        <a href="../index.html">Back</a>
+        <h1>Create Class Offer</h1>
+    </div>
+    <form class="form-styles" id="form">
+        <label for="wantedClasses">Want:</label>
+        <select id="wantedClasses" name="field4"></select>
+
+        <label for="offeringClasses">Offer:</label>
+        <select id="offeringClasses" name="field4"></select>
+
+        <input type="submit" value="Create" />
+
+        <span id="msg"> </span>
+    </form>
 </body>
 </html>
+
+<script src="../js/create.js" type="module"></script>

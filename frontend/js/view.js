@@ -1,46 +1,59 @@
+import * as constants from "../constants.js";
+
+let classOffers;
+
+//set oninput for filter
+document.getElementById("want").oninput = filter;
+document.getElementById("offer").oninput = filter;
+
+//load api data into table
+displayAPIData();
+
 async function displayAPIData() {
   //get API data
-  /* const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-  data = await response.json(); */
-  const data = [
-    {
-      Id: 1,
-      StudentId: "A90",
-      Offer: "CS909",
-      Want: "DSA02",
-      IsCompleted: false,
-    },
-    {
-      Id: 2,
-      StudentId: "A90",
-      Offer: "CS909",
-      Want: "DSA02",
-      IsCompleted: false,
-    },
-    {
-      Id: 3,
-      StudentId: "A90",
-      Offer: "CS909",
-      Want: "DSA02",
-      IsCompleted: false,
-    },
-    {
-      Id: 4,
-      StudentId: "A90",
-      Offer: "CS909",
-      Want: "DSA02",
-      IsCompleted: false,
-    },
-  ];
+  const response = await fetch(constants.backendUrl);
+  classOffers = await response.json();
 
-  //generate HTML code
-  const tableData = data
+  renderTable(classOffers);
+}
+
+//Filter Function for Search
+async function filter() {
+  const wantedSearch = document
+    .getElementById("want")
+    .value.trim()
+    .toUpperCase();
+  const offeringSearch = document
+    .getElementById("offer")
+    .value.trim()
+    .toUpperCase();
+
+  const filteredOffers = classOffers.filter((c) => {
+    if (wantedSearch == "" && offeringSearch == "") {
+      return true;
+    } else if (wantedSearch == "") {
+      return c.Offer.toUpperCase().includes(offeringSearch);
+    } else if (offeringSearch == "") {
+      return c.Want.toUpperCase().includes(wantedSearch);
+    } else {
+      return (
+        c.Offer.toUpperCase().includes(offeringSearch) &&
+        c.Want.toUpperCase().includes(wantedSearch)
+      );
+    }
+  });
+
+  renderTable(filteredOffers);
+}
+
+function renderTable(data) {
+  const dataHtml = data
     .map(function (value) {
       return `<tr>
             <td>${value.Id}</td>
-            <td>${value.StudentId}</td>
-            <td>${value.Offer}</td>
+            <td>${value.CreatedBy}</td>
             <td>${value.Want}</td>
+            <td>${value.Offer}</td>
             <td><a href="">Accept Offer</a></td>
         </tr>`;
     })
@@ -48,7 +61,5 @@ async function displayAPIData() {
 
   //set tableBody to new HTML code
   const tableBody = document.querySelector("#tableBody");
-  tableBody.innerHTML = tableData;
+  tableBody.innerHTML = dataHtml;
 }
-
-displayAPIData();
