@@ -3,9 +3,6 @@ import { getLoginSession } from "../helpers.js";
 
 let classOffers;
 
-//set global acceptOffer function
-window.acceptOffer = acceptOffer;
-
 //set oninput for filter
 document.getElementById("want").oninput = filter;
 document.getElementById("offer").oninput = filter;
@@ -21,13 +18,13 @@ async function displayAPIData() {
   }
 
   const studentId = userSession.userID; */
-  const studentId = "anotherStudentId";
+  const studentId = "someStudentId";
 
   //get API data
   const response = await fetch(constants.backendUrl);
   classOffers = await response.json();
   classOffers = classOffers.filter((c) => {
-    return c.CompletedBy == "" && c.CreatedBy != studentId;
+    return c.CreatedBy == studentId;
   });
 
   renderTable(classOffers);
@@ -65,16 +62,25 @@ async function filter() {
 function renderTable(data) {
   const dataHtml = data
     .map(function (value) {
+      const urlQueryParam = `?Id=${value.Id}&Want=${value.Want}&Offer=${value.Offer}`;
+
       return `<tr>
             <td>${value.Id}</td>
             <td>${value.CreatedBy}</td>
             <td>${value.Want}</td>
             <td>${value.Offer}</td>
-            <td>
-              <a onclick="window.acceptOffer(${value.Id})">
-                <u>Accept Offer</u>
-              </a>
-            </td>
+            <td>${value.CompletedBy}</td>
+            ${
+              value.CompletedBy == ""
+                ? "<td>\
+              <a href='./edit.html" +
+                  urlQueryParam +
+                  "'>\
+                <u>Edit Offer</u>\
+              </a>\
+            </td>"
+                : ""
+            }
         </tr>`;
     })
     .join("");
@@ -82,30 +88,4 @@ function renderTable(data) {
   //set tableBody to new HTML code
   const tableBody = document.querySelector("#tableBody");
   tableBody.innerHTML = dataHtml;
-}
-
-async function acceptOffer(offerId) {
-  /* const userSession = await getLoginSession();
-  if (userSession == "error") {
-    alert("You must be logged in to create offers!");
-    return;
-  }
-
-  const completedBy = userSession.userID; */
-  const completedBy = "anotherStudentId";
-  const response = await fetch(`${constants.backendUrl}/${offerId}`, {
-    method: "PUT",
-    body: JSON.stringify({
-      CompletedBy: completedBy,
-    }),
-  });
-
-  if (response.status != 200) {
-    alert("Error accepting offer: ", response.statusText);
-    return;
-  }
-
-  alert("Offer has been accepted!");
-  //reload table
-  displayAPIData();
 }

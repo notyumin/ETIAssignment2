@@ -1,0 +1,123 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header a {
+  margin-right: 10px;
+}
+
+.form-styles {
+  width: 30rem;
+  padding: 10px 20px;
+  background: #f4f7f8;
+  margin: 10px auto;
+  padding: 20px;
+  background: #f4f7f8;
+  border-radius: 8px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.form-styles fieldset {
+  border: none;
+}
+.form-styles legend {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+.form-styles label {
+  display: block;
+  margin-bottom: 8px;
+}
+.form-styles input[type="text"],
+.form-styles input[type="date"],
+.form-styles input[type="datetime"],
+.form-styles input[type="email"],
+.form-styles input[type="number"],
+.form-styles input[type="search"],
+.form-styles input[type="time"],
+.form-styles input[type="url"],
+.form-styles textarea,
+.form-styles select {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  margin: 0;
+  outline: 0;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  background-color: #e8eeef;
+  color: #8a97a0;
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+  margin-bottom: 30px;
+}
+.form-styles input[type="text"]:focus,
+.form-styles input[type="date"]:focus,
+.form-styles input[type="datetime"]:focus,
+.form-styles input[type="email"]:focus,
+.form-styles input[type="number"]:focus,
+.form-styles input[type="search"]:focus,
+.form-styles input[type="time"]:focus,
+.form-styles input[type="url"]:focus,
+.form-styles textarea:focus,
+.form-styles select:focus {
+  background: #d2d9dd;
+}
+.form-styles select {
+  -webkit-appearance: menulist-button;
+  height: 35px;
+}
+.form-styles .number {
+  background: #1abc9c;
+  color: #fff;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  font-size: 0.8em;
+  margin-right: 4px;
+  line-height: 30px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-radius: 15px 15px 15px 0px;
+}
+
+.form-styles input[type="submit"],
+.form-styles input[type="button"] {
+  position: relative;
+  display: block;
+  padding: 19px 39px 18px 39px;
+  color: #fff;
+  margin: 0 auto;
+  background: #1abc9c;
+  font-size: 18px;
+  text-align: center;
+  font-style: normal;
+  width: 100%;
+  border: 1px solid #16a085;
+  border-width: 1px 1px 3px;
+  margin-bottom: 10px;
+}
+.form-styles input[type="submit"]:hover,
+.form-styles input[type="button"]:hover {
+  background: #109177;
+}
+
+#deleteBtn {
+  background: #e60c0c;
+}
+
+#deleteBtn:hover {
+  background: #b31919;
+}

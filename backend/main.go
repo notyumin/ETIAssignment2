@@ -18,8 +18,7 @@ type ClassOffer struct {
 	CreatedBy   string //studentId
 	Offer       string
 	Want        string
-	IsCompleted bool
-	completedBy string //studentId
+	CompletedBy string //studentId
 }
 
 var db *gorm.DB
@@ -61,7 +60,6 @@ func initRouter() {
 	router.HandleFunc("/classOffers", getClassOffers).Methods("GET") //has url query params
 	router.HandleFunc("/classOffers", createClassOffer).Methods("POST")
 	router.HandleFunc("/classOffers/{id}", updateClassOffer).Methods("PUT")
-	//router.HandleFunc("/classOffers/{id}/complete", completeClassOffer).Methods("PUT")
 	router.HandleFunc("/classOffers/{id}", deleteClassOffer).Methods("DELETE")
 
 	portNo := os.Getenv("BACKEND_PORT")
@@ -135,7 +133,7 @@ func createClassOffer(w http.ResponseWriter, r *http.Request) {
 	classOffer.Id = 0
 
 	//Offers should be incomplete on creation
-	classOffer.IsCompleted = false
+	classOffer.CompletedBy = ""
 
 	dbErr := db.Create(&classOffer).Error
 	if dbErr != nil {
@@ -171,12 +169,6 @@ func updateClassOffer(w http.ResponseWriter, r *http.Request) {
 	httpRespondWith(w, http.StatusOK, newClassOffer)
 }
 
-/*func completeClassOffer() {
-	//use map syntax for gorm so that it can update zero values
-	//https://gorm.io/docs/update.html#Updates-multiple-columns
-}
-*/
-
 func deleteClassOffer(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	id := params["id"]
@@ -191,7 +183,7 @@ func deleteClassOffer(w http.ResponseWriter, r *http.Request) {
 	//delete from driver where id = id
 	db.Delete(&ClassOffer{}, id)
 
-	httpRespondWith(w, http.StatusAccepted, fmt.Sprintf("Class Offer of ID %s successfully deleted", id))
+	httpRespondWith(w, http.StatusOK, fmt.Sprintf("Class Offer of ID %s successfully deleted", id))
 }
 
 /////////////////////////

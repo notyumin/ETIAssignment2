@@ -5,7 +5,6 @@ import * as constants from "../constants.js";
 document.getElementById("form").onsubmit = submit;
 
 //get form dropdown options
-const allClassOptions = [];
 const wantedClassOptions = ["DSA01", "ETI02", "ISM03"];
 const offeringClassOptions = ["DSA04", "ETI05", "ISM06"];
 
@@ -34,11 +33,10 @@ async function submit(e) {
     return;
   }
 
-  const studentId = userSession.userID; */
-  const createdBy = "SomeStudentId";
+  const createdBy = userSession.userID; */
+  const createdBy = "someStudentId";
 
   //call api
-  console.log("Wanted Class: ", wantedClass, "Offering Class: ", offeringClass);
   const response = await fetch(constants.backendUrl, {
     method: "POST",
     body: JSON.stringify({
@@ -49,7 +47,7 @@ async function submit(e) {
   });
 
   if (response.status != 200) {
-    alert("Error creating class: ", response.statusText);
+    alert("Error creating offer: ", response.statusText);
     return;
   }
 
