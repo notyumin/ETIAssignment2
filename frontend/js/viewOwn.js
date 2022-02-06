@@ -14,6 +14,7 @@ async function displayAPIData() {
   const userSession = await getLoginSession();
   if (userSession == "error") {
     alert("You must be logged in to view your offers!");
+    window.location.replace(constants.loginUrl);
     return;
   }
 

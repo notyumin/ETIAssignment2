@@ -30,6 +30,7 @@ async function submit(e) {
   const userSession = await getLoginSession();
   if (userSession == "error") {
     alert("You must be logged in to create offers!");
+    window.location.replace(constants.loginUrl);
     return;
   }
 

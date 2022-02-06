@@ -36,6 +36,7 @@ async function updateOffer(e) {
   const userSession = await getLoginSession();
   if (userSession == "error") {
     alert("You must be logged in to update offers!");
+    window.location.replace(constants.loginUrl);
     return;
   }
 
@@ -60,6 +61,7 @@ async function deleteOffer() {
   const userSession = await getLoginSession();
   if (userSession == "error") {
     alert("You must be logged in to delete offers!");
+    window.location.replace(constants.loginUrl);
     return;
   }
 

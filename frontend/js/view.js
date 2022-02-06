@@ -17,6 +17,7 @@ async function displayAPIData() {
   const userSession = await getLoginSession();
   if (userSession == "error") {
     alert("You must be logged in to view offers!");
+    window.location.replace(constants.loginUrl);
     return;
   }
 
@@ -88,6 +89,7 @@ async function acceptOffer(offerId) {
   const userSession = await getLoginSession();
   if (userSession == "error") {
     alert("You must be logged in to accept offers!");
+    window.location.replace(constants.loginUrl);
     return;
   }
 
@@ -109,7 +111,28 @@ async function acceptOffer(offerId) {
   //update students' classes
   //const newOffer = await response.json();
   //newOffer.CreatedBy, newOffer.CompletedBy, newOffer.Want, newOffer.Offer;
-  //get modulecode from classcode
+  //get current semester startdate
+  const semesterStartDate = "";
+
+  //get class info localhost:8041/api/v1/classes/{semester_start_date}?classCode=...
+
+  //update class info
+
+  //send update request
+  /* await fetch(
+    `${constants.classesUrl}/${semesterStartDate}?moduleCode=...&classCode=...`,
+    {
+      method: "PUT",
+      headers: "content",
+      body: JSON.stringify({
+        ClassCode: "...",
+        Schedule: "...",
+        Tutor: "...",
+        Capacity: "...",
+        Students: ["...", "...", "..."],
+      }),
+    }
+  ); */
 
   alert("Offer has been accepted!");
   //reload table
