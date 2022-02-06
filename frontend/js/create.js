@@ -53,5 +53,5 @@ async function submit(e) {
 
   //alert and redirect
   alert("Class Offer Created");
-  window.location.replace("http://localhost:8140");
+  window.location.replace(constants.frontendUrl);
 }

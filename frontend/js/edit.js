@@ -53,7 +53,7 @@ async function updateOffer(e) {
   }
 
   alert("Offer has been updated!");
-  window.location.replace("http://localhost:8140/html/viewOwn.html");
+  window.location.replace(`${constants.frontendUrl}/html/viewOwn.html`);
 }
 
 async function deleteOffer() {
@@ -73,5 +73,5 @@ async function deleteOffer() {
   }
 
   alert("Offer has been deleted!");
-  window.location.replace("http://localhost:8140/html/viewOwn.html");
+  window.location.replace(`${constants.frontendUrl}/html/viewOwn.html`);
 }
