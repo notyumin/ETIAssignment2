@@ -8,7 +8,7 @@ import * as constants from "./constants.js";
 export async function getLoginSession() {
   //validate user logged in
   const response = await fetch(constants.sessionUrl, {
-    credentials: "include",
+    credentials: "same-origin",
   });
   if (response.status == 404) {
     return "error";
