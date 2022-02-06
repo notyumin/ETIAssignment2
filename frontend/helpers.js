@@ -67,6 +67,12 @@ function getMonday(d) {
   return new Date(d.setDate(diff));
 }
 
+/**
+ * Turns single digit number to 2 digits
+ *
+ * @return {string}
+ * 2 digit number string, e.g. "07"
+ */
 function twoDigit(n) {
   return n.toLocaleString("en-US", {
     minimumIntegerDigits: 2,
