@@ -120,7 +120,15 @@ func createClassOffer(w http.ResponseWriter, r *http.Request) {
 
 	//TODO: Validate "studentId" doesn't have "want"
 
-	//TODO: Validate if offer with same "studentId", "offer" and "want" exists
+	//Validate if offer with same "createdBy", "offer" and "want" exists
+	var existingOffer ClassOffer
+	notFoundError := db.Where("createdBy = ? AND offer = ? AND want = ?",
+		classOffer.CreatedBy, classOffer.Offer, classOffer.Want).First(&existingOffer).Error
+
+	if notFoundError != nil {
+		httpRespondWith(w, http.StatusBadRequest, "Offer already exists")
+		return
+	}
 
 	//Disallow manual setting of Id
 	//GORM will automatically assign Id if it is zero value

@@ -1,5 +1,5 @@
 import * as constants from "../constants.js";
-import { getLoginSession } from "../helpers.js";
+import { getLoginSession, getAllClasses } from "../helpers.js";
 
 //set form onsubmit
 document.getElementById("form").onsubmit = updateOffer;
@@ -15,8 +15,8 @@ const want = urlParams.Want;
 const offer = urlParams.Offer;
 
 //get form dropdown options
-const wantedClassOptions = ["DSA01", "ETI02", "ISM03"];
-const offeringClassOptions = ["DSA04", "ETI05", "ISM06"];
+const wantedClassOptions = getAllClasses();
+const offeringClassOptions = getAllClasses();
 
 //set form dropdown options
 const wantedClassHtml = wantedClassOptions.map((value) => {

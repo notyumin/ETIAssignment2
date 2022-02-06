@@ -1,5 +1,5 @@
 import * as constants from "../constants.js";
-import { getLoginSession } from "../helpers.js";
+import { getLoginSession, getSemesterStartDateString } from "../helpers.js";
 
 let classOffers;
 
@@ -108,33 +108,52 @@ async function acceptOffer(offerId) {
     return;
   }
 
-  //update students' classes
-  //const newOffer = await response.json();
-  //newOffer.CreatedBy, newOffer.CompletedBy, newOffer.Want, newOffer.Offer;
-  //get current semester startdate
-  const semesterStartDate = "";
-
-  //get class info localhost:8041/api/v1/classes/{semester_start_date}?classCode=...
-
-  //update class info
-
-  //send update request
-  /* await fetch(
-    `${constants.classesUrl}/${semesterStartDate}?moduleCode=...&classCode=...`,
-    {
-      method: "PUT",
-      headers: "content",
-      body: JSON.stringify({
-        ClassCode: "...",
-        Schedule: "...",
-        Tutor: "...",
-        Capacity: "...",
-        Students: ["...", "...", "..."],
-      }),
-    }
-  ); */
+  //update student's classes
+  const newOffer = await response.json();
+  await swapStudentClass(
+    newOffer.Offer,
+    newOffer.CreatedBy,
+    newOffer.CompletedBy
+  );
+  await swapStudentClass(
+    newOffer.Want,
+    newOffer.CompletedBy,
+    newOffer.CreatedBy
+  );
 
   alert("Offer has been accepted!");
   //reload table
   displayAPIData();
+}
+
+async function swapStudentClass(classCode, sToRemove, sToAdd) {
+  //get current semester startdate
+  const semesterDateString = getSemesterStartDateString();
+
+  //get class info localhost:8041/api/v1/classes/{semester_start_date}?classCode=...
+  let response = await fetch(
+    `${constants.classesUrl}/${semesterDateString}?classCode=${classCode}`
+  );
+  const currentClassInfo = await response.json();
+
+  //update class info
+  const removedStudentList = currentClassInfo.Students.filter((student) => {
+    return student != sToRemove;
+  });
+  const newStudentList = [...removedStudentList, sToAdd];
+
+  //get modulecode from classcode
+  const moduleCode = classCode.split("_")[0];
+
+  //send update request
+  await fetch(
+    `${constants.classesUrl}/${semesterDateString}?moduleCode=${moduleCode}&classCode=${classCode}`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        Students: newStudentList,
+      }),
+    }
+  );
 }

@@ -18,6 +18,8 @@ services:
       - BACKEND_PORT=${BACKEND_PORT}
 
   frontend:
+    depends_on:
+      - backend
     build:
         context: ./frontend
     image: class_exchange_frontend

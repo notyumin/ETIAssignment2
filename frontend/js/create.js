@@ -1,12 +1,12 @@
-import { getLoginSession } from "../helpers.js";
+import { getLoginSession, getAllClasses } from "../helpers.js";
 import * as constants from "../constants.js";
 
 //set form onsubmit
 document.getElementById("form").onsubmit = submit;
 
 //get form dropdown options
-const wantedClassOptions = ["DSA01", "ETI02", "ISM03"];
-const offeringClassOptions = ["DSA04", "ETI05", "ISM06"];
+const wantedClassOptions = getAllClasses();
+const offeringClassOptions = getAllClasses();
 
 //set form dropdown options
 const wantedClassHtml = wantedClassOptions.map((value) => {
