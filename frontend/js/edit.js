@@ -1,4 +1,5 @@
 import * as constants from "../constants.js";
+import { getLoginSession } from "../helpers.js";
 
 //set form onsubmit
 document.getElementById("form").onsubmit = updateOffer;
