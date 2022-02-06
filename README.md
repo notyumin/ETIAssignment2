@@ -8,6 +8,8 @@ _This project was made for Assignment 2 of Ngee Ann Polytechnic's Emerging Trend
   - [Container Images](#container-images)
   - [Run Microservices](#run-microservices)
 
+> NOTE: No SQL Script is needed as the database tables are managed by GORM's Automigrate Feature
+
 ## Microservice Architecture Design
 
 ![Architecture Diagram](./architecture_diagram.png)
