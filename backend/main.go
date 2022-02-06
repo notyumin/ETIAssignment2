@@ -101,12 +101,6 @@ func getClassOffers(w http.ResponseWriter, r *http.Request) {
 }
 
 func createClassOffer(w http.ResponseWriter, r *http.Request) {
-	//get session ID from http header cookie (connect.sId?)
-
-	//validate session ID with redis server
-
-	//get userId from redis server
-
 	var classOffer ClassOffer
 
 	decodeErr := json.NewDecoder(r.Body).Decode(&classOffer)

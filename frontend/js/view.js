@@ -71,8 +71,8 @@ function renderTable(data) {
             <td>${value.Want}</td>
             <td>${value.Offer}</td>
             <td>
-              <a onclick="window.acceptOffer(${value.Id})">
-                <u>Accept Offer</u>
+              <a onclick="window.acceptOffer(${value.Id})" class="btn btn-outline-primary">
+                Accept Offer
               </a>
             </td>
         </tr>`;
@@ -93,6 +93,7 @@ async function acceptOffer(offerId) {
 
   const completedBy = userSession.userID;
   //const completedBy = "anotherStudentId";
+
   const response = await fetch(`${constants.backendUrl}/${offerId}`, {
     method: "PUT",
     body: JSON.stringify({
@@ -104,6 +105,11 @@ async function acceptOffer(offerId) {
     alert("Error accepting offer: ", response.statusText);
     return;
   }
+
+  //update students' classes
+  //const newOffer = await response.json();
+  //newOffer.CreatedBy, newOffer.CompletedBy, newOffer.Want, newOffer.Offer;
+  //get modulecode from classcode
 
   alert("Offer has been accepted!");
   //reload table
