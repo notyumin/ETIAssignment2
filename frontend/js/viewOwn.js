@@ -73,7 +73,7 @@ function renderTable(data) {
             ${
               value.CompletedBy == ""
                 ? "<td>\
-              <aclass = 'btn btn-outline-primary' href='./edit.html" +
+              <a class = 'btn btn-outline-primary' href='./edit.html" +
                   urlQueryParam +
                   "'>\
                 Edit Offer\
