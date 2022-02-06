@@ -14,14 +14,14 @@ document.getElementById("offer").oninput = filter;
 displayAPIData();
 
 async function displayAPIData() {
-  /* const userSession = await getLoginSession();
+  const userSession = await getLoginSession();
   if (userSession == "error") {
-    alert("You must be logged in to create offers!");
+    alert("You must be logged in to view offers!");
     return;
   }
 
-  const studentId = userSession.userID; */
-  const studentId = "anotherStudentId";
+  const studentId = userSession.userID;
+  //const studentId = "anotherStudentId";
 
   //get API data
   const response = await fetch(constants.backendUrl);
@@ -85,14 +85,14 @@ function renderTable(data) {
 }
 
 async function acceptOffer(offerId) {
-  /* const userSession = await getLoginSession();
+  const userSession = await getLoginSession();
   if (userSession == "error") {
-    alert("You must be logged in to create offers!");
+    alert("You must be logged in to accept offers!");
     return;
   }
 
-  const completedBy = userSession.userID; */
-  const completedBy = "anotherStudentId";
+  const completedBy = userSession.userID;
+  //const completedBy = "anotherStudentId";
   const response = await fetch(`${constants.backendUrl}/${offerId}`, {
     method: "PUT",
     body: JSON.stringify({

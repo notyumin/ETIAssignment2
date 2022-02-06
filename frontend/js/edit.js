@@ -32,11 +32,11 @@ document.getElementById("offeringClasses").innerHTML = offeringClassHtml;
 
 async function updateOffer(e) {
   e.preventDefault();
-  /* const userSession = await getLoginSession();
+  const userSession = await getLoginSession();
   if (userSession == "error") {
     alert("You must be logged in to update offers!");
     return;
-  }*/
+  }
 
   const response = await fetch(`${constants.backendUrl}/${id}`, {
     method: "PUT",
@@ -56,11 +56,11 @@ async function updateOffer(e) {
 }
 
 async function deleteOffer() {
-  /* const userSession = await getLoginSession();
+  const userSession = await getLoginSession();
   if (userSession == "error") {
     alert("You must be logged in to delete offers!");
     return;
-  }*/
+  }
 
   const response = await fetch(`${constants.backendUrl}/${id}`, {
     method: "DELETE",

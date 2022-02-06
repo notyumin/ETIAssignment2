@@ -27,14 +27,14 @@ async function submit(e) {
   const offeringClass = document.getElementById("offeringClasses").value;
 
   //validate user logged in
-  /* const userSession = await getLoginSession();
+  const userSession = await getLoginSession();
   if (userSession == "error") {
     alert("You must be logged in to create offers!");
     return;
   }
 
-  const createdBy = userSession.userID; */
-  const createdBy = "someStudentId";
+  const createdBy = userSession.userID;
+  //const createdBy = "someStudentId";
 
   //call api
   const response = await fetch(constants.backendUrl, {
