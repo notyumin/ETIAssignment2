@@ -1,11 +1,11 @@
 body {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
-a {
+.menuBtn {
   background-color: #009879;
   border-radius: 1.5rem;
   padding: 5rem 0px 5rem 0px;
