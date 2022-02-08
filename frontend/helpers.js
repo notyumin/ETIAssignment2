@@ -29,7 +29,8 @@ export function getSemesterStartDateString() {
   const semesterStartDate = getMonday(new Date());
   const semesterDateString = `${twoDigit(
     semesterStartDate.getDate()
-  )}-${twoDigit(semesterStartDate.getMonth())}-${twoDigit(
+  )}-${twoDigit(semesterStartDate.getMonth() + 1)}-${twoDigit(
+    //getMonth + 1 because getMonth returns from 0-11
     semesterStartDate.getFullYear()
   )}`;
 
