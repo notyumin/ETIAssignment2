@@ -5,8 +5,8 @@ import * as constants from "../constants.js";
 document.getElementById("form").onsubmit = submit;
 
 //get form dropdown options
-const wantedClassOptions = getAllClasses();
-const offeringClassOptions = getAllClasses();
+const wantedClassOptions = await getAllClasses();
+const offeringClassOptions = await getAllClasses();
 
 //set form dropdown options
 const wantedClassHtml = wantedClassOptions.map((value) => {
