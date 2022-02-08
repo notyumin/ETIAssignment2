@@ -122,10 +122,12 @@ func createClassOffer(w http.ResponseWriter, r *http.Request) {
 
 	//Validate if offer with same "createdBy", "offer" and "want" exists
 	var existingOffer ClassOffer
-	notFoundError := db.Where("createdBy = ? AND offer = ? AND want = ?",
+	offerNotExist := db.Where("createdBy = ? AND offer = ? AND want = ?",
 		classOffer.CreatedBy, classOffer.Offer, classOffer.Want).First(&existingOffer).Error
 
-	if notFoundError != nil {
+	//GORM will return an error if record doesn't exist
+	//Thus, if the record exists, error will be "nil"
+	if offerNotExist == nil {
 		httpRespondWith(w, http.StatusBadRequest, "Offer already exists")
 		return
 	}
