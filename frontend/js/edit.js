@@ -15,8 +15,8 @@ const want = urlParams.Want;
 const offer = urlParams.Offer;
 
 //get form dropdown options
-const wantedClassOptions = getAllClasses();
-const offeringClassOptions = getAllClasses();
+const wantedClassOptions = await getAllClasses();
+const offeringClassOptions = await getAllClasses();
 
 //set form dropdown options
 const wantedClassHtml = wantedClassOptions.map((value) => {
